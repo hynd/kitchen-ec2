@@ -289,7 +289,8 @@ module Kitchen
       def update_username(state)
         # TODO: if the user explicitly specified the transport's default username,
         # do NOT overwrite it!
-        if instance.transport[:username] == instance.transport.class.defaults[:username]
+        if actual_platform &&
+             instance.transport[:username] == instance.transport.class.defaults[:username]
           debug("No SSH username specified: using default username #{actual_platform.username} " \
                 " for image #{config[:image_id]}, which we detected as #{actual_platform}.")
           state[:username] = actual_platform.username
